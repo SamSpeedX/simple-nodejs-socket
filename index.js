@@ -3,7 +3,10 @@ import express from "express";
 const app = express();
 const port = 3000
 
-const token = "your token here";
+import dotenv from "dotenv";
+dotenv.config();
+
+const token = process.env.TOKEN;
 const socket = io("http://localhost:5000", {
     auth: {
         token: token,
