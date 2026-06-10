@@ -13,6 +13,18 @@ const io = new Server(httpServer, {
     pingTimeout: 25000,
 });
 
+io.use((socket, next) => {
+    const token = socket.handshake.auth.token;
+
+    console.log("Token:", token);
+
+    if (!token) {
+        return next(new Error("Unauthorized"));
+    }
+
+    next();
+});
+
 io.on("connection", (socket) => {
     console.log("Socket: ", socket.id);
 
@@ -30,6 +42,10 @@ io.on("connection", (socket) => {
                 headers: {
                     "Authorization": data.token,
                 }
+            });
+            console.log("Response: ", res.data);
+            socket.emit("add-cart-response", {
+                data: res.data.iterms
             });
         } catch (error) {
             console.log("Error: ", error?.response?.data || error?.message || error);

@@ -3,7 +3,12 @@ import express from "express";
 const app = express();
 const port = 3000
 
-const socket = io("http://localhost:5000");
+const token = "your token here";
+const socket = io("http://localhost:5000", {
+    auth: {
+        token: token,
+    }
+});
 
 socket.on("connect", () => {
     console.log("Connected:", socket.id);
