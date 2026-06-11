@@ -19,15 +19,16 @@ socket.on("connect", () => {
     socket.emit("test", {
         message: "Hello Server"
     });
+
+    socket.emit("get-carts");
 });
 
 socket.on("test-response", (data) => {
     console.log("Response:", data);
-    setInterval(() => {
-        socket.emit("test", {
-            message: "Hello Server"
-        });
-    }, 10000);
+});
+
+socket.on("get-carts-response", (data) => {
+    console.log("Carts: ", data);
 });
 
 app.get('/', (req, res) => {

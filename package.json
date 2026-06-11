@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon test.js",
+    "status": "bash run.sh",
     "server": "nodemon server.js",
-    "client": "nodemon index.js"
+    "client": "nodemon index.js",
+    "deploy": "pm2 start server.js --name cartSocket --watch"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +17,10 @@
     "axios": "^1.17.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "http": "^0.0.1-security",
-    "nodemon": "^3.1.14",
     "socket.io": "^4.8.3",
     "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
